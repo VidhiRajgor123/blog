@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <h4 class="mt-4 mb-4 display-4">Show details of article <%= @article.id %>
+    </h4>
+  </div>
+  <div class="row justify-content-center">
+    <table class="table">
+      <tbody>
+        <tr>
+          <th>Title:</th>
+          <td>
+            <%= @article.title %>
+          </td>
+        </tr>
+        <tr>
+          <th>Description:</th>
+          <td>
+            <%= @article.body %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row justify-content-center">
+    <h4 class="mt-4 mb-4 display-4">Comments</h4>
+  </div>
+  <div class="row justify-content-center">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Commenter</th>
+          <th scope="col">Comment</th>
+          <th scope="col">Status</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @article.comments.each do |comment| %>
+          <tr>
+            <td>
+              <%= comment.commenter %>
+            </td>
+            <td>
+              <%= comment.body %>
+            </td>
+            <td>
+              <%= comment.status %>
+            </td>
+            <td><%= link_to 'Delete',[comment.article, comment],data: { turbo_method: :delete,turbo_confirm: 'Are you sure?'} %></td>
+          </tr>
+          <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="row justify-content-center">
+    <h4 class="mt-4 mb-4 display-4">Add a Comment</h4>
+  </div>
+  <div class="row justify-content-center">
+    <%= form_with model: [@article,@article.comments.build] do |form| %>
+      <div class="form-group">
+        <%= form.label :commenter %>
+          <%= form.text_field :commenter, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= form.label :description %>
+          <%= form.text_area :body, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= form.label :status %>
+          <%= form.select :status, ['public', 'private', 'archived'], selected: 'public', class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= form.submit class: 'form-control btn-primary' %>
+      </div>
+      <% end %>
+  </div>
+</div>

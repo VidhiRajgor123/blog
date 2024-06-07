@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <h4 class="mt-4 display-4">Listing Articles</h4>
+    </div>
+    <div class="m-3">
+        <%= link_to 'Create New Article', new_article_path %>
+    </div>
+  <% if @articles.present? %>
+  <div class="row justify-content-center">
+    <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Status</th>
+            <th scope="col" colspan="3">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% @articles.each do |article| %>
+                <tr>
+                    <td><%= article.title %></td>
+                    <td><%= article.body %></td>
+                    <td><%= article.status %></td>
+                    <td><%= link_to 'Show', article_path(article.id) %></td>
+                    <td><%= link_to 'Edit', edit_article_path(article.id) %></td>
+                    <td><%= link_to 'Delete', article_path(article.id), data: { turbo_method: :delete,turbo_confirm: 'Are you sure?'} %></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+  </div>
+  <% else %>
+    <div class="p-3 mb-2 text-center bg-light text-dark">
+      Create your first article
+    </div>
+  <% end %>
+</div>

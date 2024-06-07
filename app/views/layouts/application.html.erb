@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Blog</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+      <%= stylesheet_link_tag "application" , "data-turbo-track":"reload" %>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <%= javascript_importmap_tags %>
+</head>
+
+<body>
+  <% if notice %>
+    <p class="alert alert-success">
+      <%= notice %>
+    </p>
+    <% end %>
+      <% if alert %>
+        <p class="alert alert-danger">
+          <%= alert %>
+        </p>
+        <% end %>
+          <%= yield %>
+</body>
+
+</html>
